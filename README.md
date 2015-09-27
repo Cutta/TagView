@@ -56,7 +56,7 @@ https://www.dropbox.com/s/m1y1npssj5b4bck/app-debug.apk?dl=0
 <a href="https://github.com/drakeet/MaterialDialog">MaterialDialog by drakeet</a>
 
 #License
-Copyright 2015 Cüneyt ÇArıkçi.
+Copyright 2015 Cüneyt Çarıkçi.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
