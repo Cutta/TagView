@@ -8,6 +8,7 @@ You can edit the tag's style, and set listener of selecting or deleting tag.
 Example usages can be found in example project.
 
 #Screen
+<img src="http://s11.postimg.org/rry7lw877/Screenshot_2015_09_29_21_17_53.png"></img>
 <img src="http://i.giphy.com/3oEduFls2tAwrOALzG.gif"></img>
 
 
