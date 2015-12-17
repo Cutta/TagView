@@ -22,10 +22,6 @@ import java.util.List;
 
 import cuneyt.example.com.tagview.R;
 
-/**
- * Android TagView Widget
- * github https://github.com/kidhaibara/Android-Cloud-TagView-Plus.git
- */
 public class TagView extends RelativeLayout {
 
 	/** tag list */

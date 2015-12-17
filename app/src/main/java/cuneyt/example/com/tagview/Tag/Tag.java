@@ -2,10 +2,7 @@ package cuneyt.example.com.tagview.Tag;
 
 import android.graphics.drawable.Drawable;
 
-/**
- * Tag Entity
- * Class from: https://github.com/kaedea/Android-Cloud-TagView-Plus
- */
+
 
 public class Tag {
 
