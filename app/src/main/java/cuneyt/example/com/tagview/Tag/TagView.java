@@ -348,6 +348,13 @@ public class TagView extends RelativeLayout {
 		}
 	}
 
+	/**
+	 *
+	 */
+	public void removeAll(){
+		removeAllViews();
+	}
+
 	public int getLineMargin() {
 		return lineMargin;
 	}
