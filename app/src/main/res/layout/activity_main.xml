@@ -23,7 +23,7 @@
         android:visibility="visible"
         android:layout_below="@+id/editText">
 
-        <cuneyt.example.com.tagview.Tag.TagView
+        <com.cunoraz.tagview.TagView
             android:id="@+id/tag_group"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

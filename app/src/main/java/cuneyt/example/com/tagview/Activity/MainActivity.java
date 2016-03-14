@@ -1,39 +1,35 @@
 package cuneyt.example.com.tagview.Activity;
 
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.cunoraz.tagview.Constants;
+import com.cunoraz.tagview.OnTagClickListener;
+import com.cunoraz.tagview.OnTagDeleteListener;
+import com.cunoraz.tagview.Tag;
+import com.cunoraz.tagview.TagView;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-import butterknife.ButterKnife;
-import butterknife.InjectView;
 import cuneyt.example.com.tagview.R;
-import cuneyt.example.com.tagview.Tag.Constants;
-import cuneyt.example.com.tagview.Tag.OnTagClickListener;
-import cuneyt.example.com.tagview.Tag.OnTagDeleteListener;
-import cuneyt.example.com.tagview.Tag.Tag;
-import cuneyt.example.com.tagview.Tag.TagView;
 import cuneyt.example.com.tagview.Models.TagClass;
-import me.drakeet.materialdialog.MaterialDialog;
 
 public class MainActivity extends AppCompatActivity {
 
-    @InjectView(R.id.tag_group)
     TagView tagGroup;
 
-    @InjectView(R.id.editText)
     EditText editText;
 
 
@@ -47,9 +43,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        ButterKnife.inject(this);
-        prepareTags();
+        tagGroup = (TagView) findViewById(R.id.tag_group);
+        editText = (EditText) findViewById(R.id.editText);
 
+        prepareTags();
 
         editText.addTextChangedListener(new TextWatcher() {
             @Override
@@ -80,24 +77,17 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onTagDeleted(final TagView view, final Tag tag, final int position) {
-
-                final MaterialDialog dialog = new MaterialDialog(MainActivity.this);
-                dialog.setMessage("\"" + tag.text + "\" will be delete. Are you sure?");
-                dialog.setPositiveButton("Yes", new View.OnClickListener() {
+                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                builder.setMessage("\"" + tag.text + "\" will be delete. Are you sure?");
+                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
-                    public void onClick(View v) {
+                    public void onClick(DialogInterface dialog, int which) {
                         view.remove(position);
                         Toast.makeText(MainActivity.this, "\"" + tag.text + "\" deleted", Toast.LENGTH_SHORT).show();
-                        dialog.dismiss();
                     }
                 });
-                dialog.setNegativeButton("No", new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        dialog.dismiss();
-                    }
-                });
-                dialog.show();
+                builder.setNegativeButton("No", null);
+                builder.show();
 
             }
         });
@@ -107,7 +97,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void prepareTags() {
         tagList = new ArrayList<>();
-        JSONArray jsonArray = null;
+        JSONArray jsonArray;
         JSONObject temp;
         try {
             jsonArray = new JSONArray(Constants.COUNTRIES);
@@ -123,22 +113,18 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setTags(CharSequence cs) {
-        String text = cs.toString();
-        ArrayList<Tag> tags = new ArrayList<>();
-        Tag tag;
-        /**
-         * counter for prevent frozen effect
-         * if the tags number is greather than 20 some device will a bit frozen
-         */
-        int counter = 0;
-
         /**
          * for empty edittext
          */
-        if (text.equals("")) {
+        if (cs.toString().equals("")) {
             tagGroup.addTags(new ArrayList<Tag>());
             return;
         }
+
+        String text = cs.toString();
+        ArrayList<Tag> tags = new ArrayList<>();
+        Tag tag;
+
 
         for (int i = 0; i < tagList.size(); i++) {
             if (tagList.get(i).getName().toLowerCase().startsWith(text.toLowerCase())) {
@@ -148,13 +134,6 @@ public class MainActivity extends AppCompatActivity {
                 if (i % 2 == 0) // you can set deletable or not
                     tag.isDeletable = true;
                 tags.add(tag);
-                counter++;
-                /**
-                 * if you don't want show all tags. You can set a limit.
-                 if (counter == 10)
-                 break;
-                 */
-
             }
         }
         tagGroup.addTags(tags);

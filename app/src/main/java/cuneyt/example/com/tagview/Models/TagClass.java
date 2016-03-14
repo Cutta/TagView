@@ -6,6 +6,7 @@ import java.util.Random;
 
 /**
  * Created by Cuneyt on 21.8.2015.
+ *
  */
 public class TagClass {
 
