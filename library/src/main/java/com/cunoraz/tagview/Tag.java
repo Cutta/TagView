@@ -27,15 +27,15 @@ public class Tag {
     }
 
     private void init(int id, String text, int tagTextColor, float tagTextSize,
-                      int layout_color, int layout_color_press, boolean isDeletable,
+                      int layoutColor, int layoutColorPress, boolean isDeletable,
                       int deleteIndicatorColor,float deleteIndicatorSize, float radius,
                       String deleteIcon, float layoutBorderSize, int layoutBorderColor) {
         this.id = id;
         this.text = text;
         this.tagTextColor = tagTextColor;
         this.tagTextSize = tagTextSize;
-        this.layoutColor = layout_color;
-        this.layoutColorPress = layout_color_press;
+        this.layoutColor = layoutColor;
+        this.layoutColorPress = layoutColorPress;
         this.isDeletable = isDeletable;
         this.deleteIndicatorColor = deleteIndicatorColor;
         this.deleteIndicatorSize = deleteIndicatorSize;
