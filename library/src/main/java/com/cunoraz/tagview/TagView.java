@@ -168,9 +168,9 @@ public class TagView extends RelativeLayout {
         float total = getPaddingLeft() + getPaddingRight();
 
         int listIndex = 1;// List Index
-        int index_bottom = 1;// The Tag to add below
-        int index_header = 1;// The header tag of this line
-        Tag tag_pre = null;
+        int indexBottom = 1;// The Tag to add below
+        int indexHeader = 1;// The header tag of this line
+        Tag tagPre = null;
         for (Tag item : mTags) {
             final int position = listIndex - 1;
             final Tag tag = item;
@@ -238,21 +238,21 @@ public class TagView extends RelativeLayout {
 
             if (mWidth <= total + tagWidth + Utils.dipToPx(this.getContext(), Constants.LAYOUT_WIDTH_OFFSET)) {
                 //need to add in new line
-                tagParams.addRule(RelativeLayout.BELOW, index_bottom);
+                tagParams.addRule(RelativeLayout.BELOW, indexBottom);
                 // initialize total param (layout padding left & layout padding right)
                 total = getPaddingLeft() + getPaddingRight();
-                index_bottom = listIndex;
-                index_header = listIndex;
+                indexBottom = listIndex;
+                indexHeader = listIndex;
             } else {
                 //no need to new line
-                tagParams.addRule(RelativeLayout.ALIGN_TOP, index_header);
+                tagParams.addRule(RelativeLayout.ALIGN_TOP, indexHeader);
                 //not header of the line
-                if (listIndex != index_header) {
+                if (listIndex != indexHeader) {
                     tagParams.addRule(RelativeLayout.RIGHT_OF, listIndex - 1);
                     tagParams.leftMargin = tagMargin;
                     total += tagMargin;
-                    if (tag_pre != null && tag_pre.tagTextSize < tag.tagTextSize) {
-                        index_bottom = listIndex;
+                    if (tagPre != null && tagPre.tagTextSize < tag.tagTextSize) {
+                        indexBottom = listIndex;
                     }
                 }
 
@@ -260,7 +260,7 @@ public class TagView extends RelativeLayout {
             }
             total += tagWidth;
             addView(tagLayout, tagParams);
-            tag_pre = tag;
+            tagPre = tag;
             listIndex++;
 
         }
@@ -270,18 +270,18 @@ public class TagView extends RelativeLayout {
     private Drawable getSelector(Tag tag) {
         if (tag.background != null) return tag.background;
         StateListDrawable states = new StateListDrawable();
-        GradientDrawable gd_normal = new GradientDrawable();
-        gd_normal.setColor(tag.layoutColor);
-        gd_normal.setCornerRadius(tag.radius);
+        GradientDrawable gdNormal = new GradientDrawable();
+        gdNormal.setColor(tag.layoutColor);
+        gdNormal.setCornerRadius(tag.radius);
         if (tag.layoutBorderSize > 0) {
-            gd_normal.setStroke(Utils.dipToPx(getContext(), tag.layoutBorderSize), tag.layoutBorderColor);
+            gdNormal.setStroke(Utils.dipToPx(getContext(), tag.layoutBorderSize), tag.layoutBorderColor);
         }
-        GradientDrawable gd_press = new GradientDrawable();
-        gd_press.setColor(tag.layoutColorPress);
-        gd_press.setCornerRadius(tag.radius);
-        states.addState(new int[]{android.R.attr.state_pressed}, gd_press);
+        GradientDrawable gdPress = new GradientDrawable();
+        gdPress.setColor(tag.layoutColorPress);
+        gdPress.setCornerRadius(tag.radius);
+        states.addState(new int[]{android.R.attr.state_pressed}, gdPress);
         //must add state_pressed first，or state_pressed will not take effect
-        states.addState(new int[]{}, gd_normal);
+        states.addState(new int[]{}, gdNormal);
         return states;
     }
 
