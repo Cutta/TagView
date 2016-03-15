@@ -183,7 +183,6 @@ public class TagView extends RelativeLayout {
             // tag text
             TextView tagView = (TextView) tagLayout.findViewById(R.id.tv_tag_item_contain);
             tagView.setText(tag.text);
-            //tagView.setPadding(textPaddingLeft, textPaddingTop, textPaddingRight, texPaddingBottom);
             LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) tagView.getLayoutParams();
             params.setMargins(textPaddingLeft, textPaddingTop, textPaddingRight, texPaddingBottom);
             tagView.setLayoutParams(params);
@@ -209,15 +208,11 @@ public class TagView extends RelativeLayout {
                 deletableView.setText(tag.deleteIcon);
                 int offset = Utils.dipToPx(getContext(), 2f);
                 deletableView.setPadding(offset, textPaddingTop, textPaddingRight + offset, texPaddingBottom);
-                /*params = (LinearLayout.LayoutParams) deletableView.getLayoutParams();
-				params.setMargins(offset, textPaddingTop, textPaddingRight+offset, texPaddingBottom);
-				deletableView.setLayoutParams(params);*/
                 deletableView.setTextColor(tag.deleteIndicatorColor);
                 deletableView.setTextSize(TypedValue.COMPLEX_UNIT_SP, tag.deleteIndicatorSize);
                 deletableView.setOnClickListener(new OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        //TagView.this.remove(position);
                         if (mDeleteListener != null) {
                             Tag targetTag = tag;
                             mDeleteListener.onTagDeleted(TagView.this, targetTag, position);
@@ -231,7 +226,6 @@ public class TagView extends RelativeLayout {
             }
 
             LayoutParams tagParams = new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-            //tagParams.setMargins(0, 0, 0, 0);
 
             //add margin of each line
             tagParams.bottomMargin = lineMargin;
