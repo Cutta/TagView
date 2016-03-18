@@ -298,10 +298,10 @@ public class TagView extends RelativeLayout {
         drawTags();
     }
 
-    public void addTags(ArrayList<Tag> tags) {
+    public void addTags(List<Tag> tags) {
         if (tags == null) return;
         mTags = new ArrayList<>();
-        if (tags.size() == 0)
+        if (tags.isEmpty())
             drawTags();
         for (Tag item : tags) {
             addTag(item);

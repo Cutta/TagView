@@ -130,7 +130,7 @@ public class MainActivity extends AppCompatActivity {
             if (tagList.get(i).getName().toLowerCase().startsWith(text.toLowerCase())) {
                 tag = new Tag(tagList.get(i).getName());
                 tag.radius = 10f;
-                tag.layoutColor = (Color.parseColor(tagList.get(i).getColor()));
+                tag.layoutColor = Color.parseColor(tagList.get(i).getColor());
                 if (i % 2 == 0) // you can set deletable or not
                     tag.isDeletable = true;
                 tags.add(tag);

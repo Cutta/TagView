@@ -278,4 +278,7 @@ public class Constants {
 			"{\"name\": \"Zambia\", \"code\": \"ZM\"}, \n" +
 			"{\"name\": \"Zimbabwe\", \"code\": \"ZW\"} \n" +
 			"]";
+	private Constants() throws InstantiationException {
+		throw new InstantiationException("This class is not for instantiation");
+	}
 }
