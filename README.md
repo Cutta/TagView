@@ -18,6 +18,18 @@ Example usages can be found in example project.
 * Listener of tag selecting and deleting.
 * Can be created from XML file or Java code.
 
+#Gradle
+<pre>
+repositories {
+    maven {
+        url "https://jitpack.io"
+    }
+}</pre>
+<pre>
+dependencies {
+    compile 'com.github.Cutta:TagView:c15dd8288a'
+}
+</pre>
 #Usage
  <pre style='color:#000000;background:#ffffff;'><span style='color:#a65700; '>&lt;</span><span style='color:#5f5035; '>com.cunoraz.tagview.TagView</span>
             <span style='color:#007997; '>android</span><span style='color:#800080; '>:</span><span style='color:#274796; '>id</span><span style='color:#808030; '>=</span><span style='color:#800000; '>"</span><span style='color:#0000e6; '>@+id/tag_group</span><span style='color:#800000; '>"</span>
@@ -26,7 +38,7 @@ Example usages can be found in example project.
             <span style='color:#007997; '>android</span><span style='color:#800080; '>:</span><span style='color:#274796; '>layout_margin</span><span style='color:#808030; '>=</span><span style='color:#800000; '>"</span><span style='color:#0000e6; '>10dp</span><span style='color:#800000; '>"</span> <span style='color:#a65700; '>/></span>
 </pre>
  
- <pre>
+ ``` java
  TagView tagGroup = (TagView)findviewById(R.id.tag_view);
  //You can add one tag
  tagGroup.addTag(Tag tag);
@@ -48,8 +60,8 @@ Example usages can be found in example project.
             @Override
             public void onTagDeleted(final TagView view, final Tag tag, final int position) {
             }
-        });  
-</pre>
+        });
+```       
 
 #Sample APK
 https://www.dropbox.com/s/m1y1npssj5b4bck/app-debug.apk?dl=0
