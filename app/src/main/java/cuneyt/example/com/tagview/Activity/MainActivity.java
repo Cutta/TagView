@@ -28,15 +28,15 @@ import cuneyt.example.com.tagview.Models.TagClass;
 
 public class MainActivity extends AppCompatActivity {
 
-    TagView tagGroup;
+    private TagView tagGroup;
 
-    EditText editText;
+    private EditText editText;
 
 
     /**
      * sample country list
      */
-    ArrayList<TagClass> tagList;
+    private ArrayList<TagClass> tagList;
 
 
     @Override
