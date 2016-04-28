@@ -10,9 +10,9 @@ import java.util.Random;
  */
 public class TagClass {
 
-    String code;
-    String name;
-    String color;
+    private String code;
+    private String name;
+    private String color;
 
     public TagClass() {
 

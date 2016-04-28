@@ -51,12 +51,12 @@ public class TagView extends RelativeLayout {
     /**
      * custom layout param
      */
-    int lineMargin;
-    int tagMargin;
-    int textPaddingLeft;
-    int textPaddingRight;
-    int textPaddingTop;
-    int texPaddingBottom;
+    private int lineMargin;
+    private int tagMargin;
+    private int textPaddingLeft;
+    private int textPaddingRight;
+    private int textPaddingTop;
+    private int texPaddingBottom;
 
 
     /**
