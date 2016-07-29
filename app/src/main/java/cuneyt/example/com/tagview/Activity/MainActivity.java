@@ -12,9 +12,6 @@ import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.cunoraz.tagview.Constants;
-import com.cunoraz.tagview.OnTagClickListener;
-import com.cunoraz.tagview.OnTagDeleteListener;
 import com.cunoraz.tagview.Tag;
 import com.cunoraz.tagview.TagView;
 
@@ -23,8 +20,9 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-import cuneyt.example.com.tagview.R;
+import cuneyt.example.com.tagview.Constants;
 import cuneyt.example.com.tagview.Models.TagClass;
+import cuneyt.example.com.tagview.R;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -65,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        tagGroup.setOnTagClickListener(new OnTagClickListener() {
+        tagGroup.setOnTagClickListener(new TagView.OnTagClickListener() {
             @Override
             public void onTagClick(Tag tag, int position) {
                 editText.setText(tag.text);
@@ -73,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-        tagGroup.setOnTagDeleteListener(new OnTagDeleteListener() {
+        tagGroup.setOnTagDeleteListener(new TagView.OnTagDeleteListener() {
 
             @Override
             public void onTagDeleted(final TagView view, final Tag tag, final int position) {

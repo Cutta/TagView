@@ -245,7 +245,7 @@ public class TagView extends RelativeLayout {
                     tagParams.addRule(RelativeLayout.RIGHT_OF, listIndex - 1);
                     tagParams.leftMargin = tagMargin;
                     total += tagMargin;
-                    if (tagPre != null && tagPre.tagTextSize < tag.tagTextSize) {
+                    if (tagPre.tagTextSize < tag.tagTextSize) {
                         indexBottom = listIndex;
                     }
                 }
@@ -412,4 +412,14 @@ public class TagView extends RelativeLayout {
         mDeleteListener = deleteListener;
     }
 
+
+
+
+
+    public interface OnTagDeleteListener {
+        void onTagDeleted(TagView view, Tag tag, int position);
+    }
+    public interface OnTagClickListener {
+        void onTagClick(Tag tag, int position);
+    }
 }
