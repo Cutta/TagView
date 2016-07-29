@@ -28,7 +28,7 @@ repositories {
  ```
  ``` java
 dependencies {
-    compile 'com.github.Cutta:TagView:c15dd8288a'
+    compile 'com.github.Cutta:TagView:1.0'
 }
  ```
 #Usage
