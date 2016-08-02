@@ -6,6 +6,7 @@ import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.StateListDrawable;
+import android.os.Build;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
@@ -56,7 +57,7 @@ public class TagView extends RelativeLayout {
     private int textPaddingLeft;
     private int textPaddingRight;
     private int textPaddingTop;
-    private int texPaddingBottom;
+    private int textPaddingBottom;
 
 
     /**
@@ -119,7 +120,7 @@ public class TagView extends RelativeLayout {
         this.textPaddingLeft = (int) typeArray.getDimension(R.styleable.TagView_textPaddingLeft, Utils.dipToPx(this.getContext(), Constants.DEFAULT_TAG_TEXT_PADDING_LEFT));
         this.textPaddingRight = (int) typeArray.getDimension(R.styleable.TagView_textPaddingRight, Utils.dipToPx(this.getContext(), Constants.DEFAULT_TAG_TEXT_PADDING_RIGHT));
         this.textPaddingTop = (int) typeArray.getDimension(R.styleable.TagView_textPaddingTop, Utils.dipToPx(this.getContext(), Constants.DEFAULT_TAG_TEXT_PADDING_TOP));
-        this.texPaddingBottom = (int) typeArray.getDimension(R.styleable.TagView_textPaddingBottom, Utils.dipToPx(this.getContext(), Constants.DEFAULT_TAG_TEXT_PADDING_BOTTOM));
+        this.textPaddingBottom = (int) typeArray.getDimension(R.styleable.TagView_textPaddingBottom, Utils.dipToPx(this.getContext(), Constants.DEFAULT_TAG_TEXT_PADDING_BOTTOM));
         typeArray.recycle();
     }
 
@@ -176,18 +177,24 @@ public class TagView extends RelativeLayout {
             final Tag tag = item;
 
             // inflate tag layout
-            View tagLayout = (View) mInflater.inflate(R.layout.tagview_item, null);
+            View tagLayout = mInflater.inflate(R.layout.tagview_item, null);
             tagLayout.setId(listIndex);
-            tagLayout.setBackgroundDrawable(getSelector(tag));
+
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN){
+                tagLayout.setBackgroundDrawable(getSelector(tag));
+            } else {
+                tagLayout.setBackground(getSelector(tag));
+            }
 
             // tag text
             TextView tagView = (TextView) tagLayout.findViewById(R.id.tv_tag_item_contain);
             tagView.setText(tag.text);
             LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) tagView.getLayoutParams();
-            params.setMargins(textPaddingLeft, textPaddingTop, textPaddingRight, texPaddingBottom);
+            params.setMargins(textPaddingLeft, textPaddingTop, textPaddingRight, textPaddingBottom);
             tagView.setLayoutParams(params);
             tagView.setTextColor(tag.tagTextColor);
             tagView.setTextSize(TypedValue.COMPLEX_UNIT_SP, tag.tagTextSize);
+
             tagLayout.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -207,15 +214,14 @@ public class TagView extends RelativeLayout {
                 deletableView.setVisibility(View.VISIBLE);
                 deletableView.setText(tag.deleteIcon);
                 int offset = Utils.dipToPx(getContext(), 2f);
-                deletableView.setPadding(offset, textPaddingTop, textPaddingRight + offset, texPaddingBottom);
+                deletableView.setPadding(offset, textPaddingTop, textPaddingRight + offset, textPaddingBottom);
                 deletableView.setTextColor(tag.deleteIndicatorColor);
                 deletableView.setTextSize(TypedValue.COMPLEX_UNIT_SP, tag.deleteIndicatorSize);
                 deletableView.setOnClickListener(new OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         if (mDeleteListener != null) {
-                            Tag targetTag = tag;
-                            mDeleteListener.onTagDeleted(TagView.this, targetTag, position);
+                            mDeleteListener.onTagDeleted(TagView.this, tag, position);
                         }
                     }
                 });
@@ -262,7 +268,9 @@ public class TagView extends RelativeLayout {
     }
 
     private Drawable getSelector(Tag tag) {
-        if (tag.background != null) return tag.background;
+        if (tag.background != null)
+            return tag.background;
+
         StateListDrawable states = new StateListDrawable();
         GradientDrawable gdNormal = new GradientDrawable();
         gdNormal.setColor(tag.layoutColor);
@@ -310,13 +318,7 @@ public class TagView extends RelativeLayout {
             addTag(tag);
         }
     }
-	/*public void addTags(ArrayList<String> tags){
-		if (tags==null)return;
-		for(String item:tags){
-			Tag tag = new Tag(item);
-			addTag(tag);
-		}
-	}*/
+
 
     /**
      * get tag list
@@ -343,6 +345,7 @@ public class TagView extends RelativeLayout {
      * remove all views
      */
     public void removeAll() {
+        mTags.clear(); //clear all of tags
         removeAllViews();
     }
 
@@ -386,12 +389,12 @@ public class TagView extends RelativeLayout {
         this.textPaddingTop = Utils.dipToPx(getContext(), textPaddingTop);
     }
 
-    public int getTexPaddingBottom() {
-        return texPaddingBottom;
+    public int gettextPaddingBottom() {
+        return textPaddingBottom;
     }
 
-    public void setTexPaddingBottom(float texPaddingBottom) {
-        this.texPaddingBottom = Utils.dipToPx(getContext(), texPaddingBottom);
+    public void settextPaddingBottom(float textPaddingBottom) {
+        this.textPaddingBottom = Utils.dipToPx(getContext(), textPaddingBottom);
     }
 
     /**
@@ -412,10 +415,9 @@ public class TagView extends RelativeLayout {
         mDeleteListener = deleteListener;
     }
 
-
-
-
-
+    /**
+     * Listeners
+     */
     public interface OnTagDeleteListener {
         void onTagDeleted(TagView view, Tag tag, int position);
     }
