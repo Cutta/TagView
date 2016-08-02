@@ -93,6 +93,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+
     private void prepareTags() {
         tagList = new ArrayList<>();
         JSONArray jsonArray;
