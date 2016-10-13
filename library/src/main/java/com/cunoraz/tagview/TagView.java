@@ -34,10 +34,11 @@ public class TagView extends RelativeLayout {
     private ViewTreeObserver mViewTreeObserber;
 
     /**
-     * listener
+     * listeners
      */
     private OnTagClickListener mClickListener;
     private OnTagDeleteListener mDeleteListener;
+    private OnTagLongClickListener mTagLongClickListener;
 
     /**
      * view size param
@@ -180,7 +181,7 @@ public class TagView extends RelativeLayout {
             View tagLayout = mInflater.inflate(R.layout.tagview_item, null);
             tagLayout.setId(listIndex);
 
-            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN){
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN) {
                 tagLayout.setBackgroundDrawable(getSelector(tag));
             } else {
                 tagLayout.setBackground(getSelector(tag));
@@ -201,6 +202,16 @@ public class TagView extends RelativeLayout {
                     if (mClickListener != null) {
                         mClickListener.onTagClick(tag, position);
                     }
+                }
+            });
+
+            tagLayout.setOnLongClickListener(new OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    if (mTagLongClickListener != null) {
+                        mTagLongClickListener.onTagLongClick(tag, position);
+                    }
+                    return true;
                 }
             });
 
@@ -397,6 +408,16 @@ public class TagView extends RelativeLayout {
         this.textPaddingBottom = Utils.dipToPx(getContext(), textPaddingBottom);
     }
 
+
+    /**
+     * setter for OnTagLongClickListener
+     *
+     * @param longClickListener
+     */
+    public void setOnTagLongClickListener(OnTagLongClickListener longClickListener) {
+        mTagLongClickListener = longClickListener;
+    }
+
     /**
      * setter for OnTagSelectListener
      *
@@ -421,7 +442,12 @@ public class TagView extends RelativeLayout {
     public interface OnTagDeleteListener {
         void onTagDeleted(TagView view, Tag tag, int position);
     }
+
     public interface OnTagClickListener {
         void onTagClick(Tag tag, int position);
+    }
+
+    public interface OnTagLongClickListener {
+        void onTagLongClick(Tag tag, int position);
     }
 }
