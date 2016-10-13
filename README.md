@@ -28,7 +28,7 @@ repositories {
  ```
  ``` java
 dependencies {
-    compile 'com.github.Cutta:TagView:1.2'
+    compile 'com.github.Cutta:TagView:1.3'
 }
  ```
 #Usage
@@ -60,6 +60,13 @@ dependencies {
             tagGroup.setOnTagDeleteListener(new OnTagDeleteListener() {
             @Override
             public void onTagDeleted(final TagView view, final Tag tag, final int position) {
+            }
+        });
+
+ //set long click listener
+      tagGroup.setOnTagLongClickListener(new OnTagLongClickListener() {
+            @Override
+            public void onTagLongClick(Tag tag, int position) {
             }
         });
 ```       
