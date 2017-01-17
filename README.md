@@ -2,6 +2,8 @@
 Android TagView-HashTagView
 
 [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-TagView-green.svg?style=flat)](https://android-arsenal.com/details/1/2566)
+<br><br>Xamarin version, written by <a href = "https://github.com/fernandolopes">@fernandolopes</a><br>
+https://github.com/fernandolopes/Xamarin.Android.TagView
 
 Simple android view to display collection of colorful tags efficiently.
 You can edit the tag's style, and set listener of selecting or deleting tag. 
