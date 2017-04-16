@@ -1,4 +1,4 @@
-#Android TagView
+# Android TagView
 Android TagView-HashTagView
 
 [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-TagView-green.svg?style=flat)](https://android-arsenal.com/details/1/2566)
@@ -9,18 +9,18 @@ Simple android view to display collection of colorful tags efficiently.
 You can edit the tag's style, and set listener of selecting or deleting tag. 
 Example usages can be found in example project.
 
-#Screen
+# Screen
 <img src="http://s11.postimg.org/rry7lw877/Screenshot_2015_09_29_21_17_53.png"></img>
 <img src="http://i.giphy.com/3oEduFls2tAwrOALzG.gif"></img>
 
 
-#Feature
+# Feature
 * Editable Style of Text, such as Font size and color.
 * Editable Style of Tag, Background/Pressed Color, Radius effect, Custom Background, Delete mode.
 * Listener of tag selecting and deleting.
 * Can be created from XML file or Java code.
 
-#Gradle
+# Gradle
  ``` java
 repositories {
     maven {
@@ -33,7 +33,7 @@ dependencies {
     compile 'com.github.Cutta:TagView:1.3'
 }
  ```
-#Usage
+# Usage
  <pre style='color:#000000;background:#ffffff;'><span style='color:#a65700; '>&lt;</span><span style='color:#5f5035; '>com.cunoraz.tagview.TagView</span>
             <span style='color:#007997; '>xmlns</span><span style='color:#800080; '>:</span><span style='color:#274796; '>tagview</span><span style='color:#808030; '>=</span><span style='color:#800000; '>"</span><span style='color:#0000e6; '>http://schemas.android.com/apk/res-auto</span><span style='color:#800000; '>"</span>
             <span style='color:#007997; '>android</span><span style='color:#800080; '>:</span><span style='color:#274796; '>id</span><span style='color:#808030; '>=</span><span style='color:#800000; '>"</span><span style='color:#0000e6; '>@+id/tag_group</span><span style='color:#800000; '>"</span>
@@ -80,15 +80,15 @@ dependencies {
         });
 ```       
 
-#Sample APK
+# Sample APK
 https://www.dropbox.com/s/m1y1npssj5b4bck/app-debug.apk?dl=0
 
-#Credits
+# Credits
 
 <a href = "https://plus.google.com/u/0/116948443141721480957"><img src = "https://raw.githubusercontent.com/florent37/DaVinci/master/mobile/src/main/res/drawable-hdpi/gplus.png"/></a>
 <a href = "https://twitter.com/Cuneyt_Carikci"><img src = "https://raw.githubusercontent.com/florent37/DaVinci/master/mobile/src/main/res/drawable-hdpi/twitter.png"/></a>
 <a href = "https://www.linkedin.com/in/c%C3%BCneyt-%C3%A7ar%C4%B1k%C3%A7i-b4619161?trk=nav_responsive_tab_profile_pic"><img src = "https://raw.githubusercontent.com/florent37/DaVinci/master/mobile/src/main/res/drawable-hdpi/linkedin.png"/></a>
-#License
+# License
 Copyright 2015 Cüneyt Çarıkçi.
 
 Licensed under the Apache License, Version 2.0 (the "License");
