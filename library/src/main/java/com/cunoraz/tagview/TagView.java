@@ -317,8 +317,9 @@ public class TagView extends RelativeLayout {
         if (tags.isEmpty())
             drawTags();
         for (Tag item : tags) {
-            addTag(item);
+            mTags.add(item);
         }
+        drawTags();
     }
 
 
@@ -326,8 +327,9 @@ public class TagView extends RelativeLayout {
         if (tags == null) return;
         for (String item : tags) {
             Tag tag = new Tag(item);
-            addTag(tag);
+            mTags.add(tag);
         }
+        drawTags();
     }
 
 
