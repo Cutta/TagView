@@ -43,7 +43,7 @@ captures/
 .idea/dictionaries
 .idea/libraries
 .idea/caches
-.idea/
+.idea
 
 # Keystore files
 # Uncomment the following line if you do not want  check your keystore files in.
