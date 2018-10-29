@@ -67,15 +67,15 @@ public class MainActivity extends AppCompatActivity {
         tagGroup.setOnTagLongClickListener(new TagView.OnTagLongClickListener() {
             @Override
             public void onTagLongClick(Tag tag, int position) {
-                Toast.makeText(MainActivity.this, "Long Click: " + tag.text, Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, "Long Click: " + tag.getText(), Toast.LENGTH_SHORT).show();
             }
         });
 
         tagGroup.setOnTagClickListener(new TagView.OnTagClickListener() {
             @Override
             public void onTagClick(Tag tag, int position) {
-                editText.setText(tag.text);
-                editText.setSelection(tag.text.length());//to set cursor position
+                editText.setText(tag.getText());
+                editText.setSelection(tag.getText().length());//to set cursor position
 
             }
         });
@@ -84,12 +84,12 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onTagDeleted(final TagView view, final Tag tag, final int position) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-                builder.setMessage("\"" + tag.text + "\" will be delete. Are you sure?");
+                builder.setMessage("\"" + tag.getText() + "\" will be delete. Are you sure?");
                 builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         view.remove(position);
-                        Toast.makeText(MainActivity.this, "\"" + tag.text + "\" deleted", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MainActivity.this, "\"" + tag.getText() + "\" deleted", Toast.LENGTH_SHORT).show();
                     }
                 });
                 builder.setNegativeButton("No", null);
@@ -135,10 +135,10 @@ public class MainActivity extends AppCompatActivity {
         for (int i = 0; i < tagList.size(); i++) {
             if (tagList.get(i).getName().toLowerCase().startsWith(text.toLowerCase())) {
                 tag = new Tag(tagList.get(i).getName());
-                tag.radius = 10f;
-                tag.layoutColor = Color.parseColor(tagList.get(i).getColor());
+                tag.setRadius(10f);
+                tag.setLayoutColor(Color.parseColor(tagList.get(i).getColor()));
                 if (i % 2 == 0) // you can set deletable or not
-                    tag.isDeletable = true;
+                    tag.setDeletable(true);
                 tags.add(tag);
             }
         }
