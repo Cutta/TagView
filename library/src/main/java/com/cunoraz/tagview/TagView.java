@@ -189,12 +189,12 @@ public class TagView extends RelativeLayout {
 
             // tag text
             TextView tagView = (TextView) tagLayout.findViewById(R.id.tv_tag_item_contain);
-            tagView.setText(tag.text);
+            tagView.setText(tag.getText());
             LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) tagView.getLayoutParams();
             params.setMargins(textPaddingLeft, textPaddingTop, textPaddingRight, textPaddingBottom);
             tagView.setLayoutParams(params);
-            tagView.setTextColor(tag.tagTextColor);
-            tagView.setTextSize(TypedValue.COMPLEX_UNIT_SP, tag.tagTextSize);
+            tagView.setTextColor(tag.getTagTextColor());
+            tagView.setTextSize(TypedValue.COMPLEX_UNIT_SP, tag.getTagTextSize());
 
             tagLayout.setOnClickListener(new OnClickListener() {
                 @Override
@@ -216,18 +216,19 @@ public class TagView extends RelativeLayout {
             });
 
             // calculate　of tag layout width
-            float tagWidth = tagView.getPaint().measureText(tag.text) + textPaddingLeft + textPaddingRight;
+            float tagWidth = tagView.getPaint().measureText(tag.getText()) + textPaddingLeft + textPaddingRight;
             // tagView padding (left & right)
 
             // deletable text
             TextView deletableView = (TextView) tagLayout.findViewById(R.id.tv_tag_item_delete);
-            if (tag.isDeletable) {
+
+            if (tag.isDeletable()) {
                 deletableView.setVisibility(View.VISIBLE);
-                deletableView.setText(tag.deleteIcon);
+                deletableView.setText(tag.getDeleteIcon());
                 int offset = Utils.dipToPx(getContext(), 2f);
                 deletableView.setPadding(offset, textPaddingTop, textPaddingRight + offset, textPaddingBottom);
-                deletableView.setTextColor(tag.deleteIndicatorColor);
-                deletableView.setTextSize(TypedValue.COMPLEX_UNIT_SP, tag.deleteIndicatorSize);
+                deletableView.setTextColor(tag.getDeleteIndicatorColor());
+                deletableView.setTextSize(TypedValue.COMPLEX_UNIT_SP, tag.getDeleteIndicatorSize());
                 deletableView.setOnClickListener(new OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -236,7 +237,7 @@ public class TagView extends RelativeLayout {
                         }
                     }
                 });
-                tagWidth += deletableView.getPaint().measureText(tag.deleteIcon) + textPaddingLeft + textPaddingRight;
+                tagWidth += deletableView.getPaint().measureText(tag.getDeleteIcon()) + textPaddingLeft + textPaddingRight;
                 // deletableView Padding (left & right)
             } else {
                 deletableView.setVisibility(View.GONE);
@@ -262,7 +263,7 @@ public class TagView extends RelativeLayout {
                     tagParams.addRule(RelativeLayout.RIGHT_OF, listIndex - 1);
                     tagParams.leftMargin = tagMargin;
                     total += tagMargin;
-                    if (tagPre.tagTextSize < tag.tagTextSize) {
+                    if (tagPre.getTagTextSize() < tag.getTagTextSize()) {
                         indexBottom = listIndex;
                     }
                 }
@@ -279,19 +280,19 @@ public class TagView extends RelativeLayout {
     }
 
     private Drawable getSelector(Tag tag) {
-        if (tag.background != null)
-            return tag.background;
+        if (tag.getBackground() != null)
+            return tag.getBackground();
 
         StateListDrawable states = new StateListDrawable();
         GradientDrawable gdNormal = new GradientDrawable();
-        gdNormal.setColor(tag.layoutColor);
-        gdNormal.setCornerRadius(tag.radius);
-        if (tag.layoutBorderSize > 0) {
-            gdNormal.setStroke(Utils.dipToPx(getContext(), tag.layoutBorderSize), tag.layoutBorderColor);
+        gdNormal.setColor(tag.getLayoutColor());
+        gdNormal.setCornerRadius(tag.getRadius());
+        if (tag.getLayoutBorderSize() > 0) {
+            gdNormal.setStroke(Utils.dipToPx(getContext(), tag.getLayoutBorderSize()), tag.getLayoutBorderColor());
         }
         GradientDrawable gdPress = new GradientDrawable();
-        gdPress.setColor(tag.layoutColorPress);
-        gdPress.setCornerRadius(tag.radius);
+        gdPress.setColor(tag.getLayoutColorPress());
+        gdPress.setCornerRadius(tag.getRadius());
         states.addState(new int[]{android.R.attr.state_pressed}, gdPress);
         //must add state_pressed first，or state_pressed will not take effect
         states.addState(new int[]{}, gdNormal);
